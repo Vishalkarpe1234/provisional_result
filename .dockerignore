@@ -1,0 +1,14 @@
+.git
+.gitignore
+marksheet.zip
+sample-grade-sheet.pdf
+data/*
+!data/.htaccess
+!data/sem1
+!data/sem2
+!data/sem3
+!data/sem4
+data/sem*/*
+!data/sem*/.htaccess
+cache/*
+!cache/.htaccess
