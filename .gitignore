@@ -1,0 +1,8 @@
+marksheet/marksheet/data/*
+!marksheet/marksheet/data/.htaccess
+!marksheet/marksheet/data/sem*/
+marksheet/marksheet/data/sem*/*
+!marksheet/marksheet/data/sem*/.htaccess
+
+marksheet/marksheet/cache/*
+!marksheet/marksheet/cache/.htaccess

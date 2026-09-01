@@ -1,0 +1,24 @@
+# Raise upload limits when running under Apache with mod_php.
+# Guarded by IfModule: with PHP-FPM or CGI these directives would cause a
+# 500 error, so they are skipped and .user.ini is used instead.
+<IfModule mod_php.c>
+    php_value upload_max_filesize 512M
+    php_value post_max_size       512M
+    php_value memory_limit        512M
+    php_value max_execution_time  300
+    php_value max_input_time      300
+</IfModule>
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 512M
+    php_value post_max_size       512M
+    php_value memory_limit        512M
+    php_value max_execution_time  300
+    php_value max_input_time      300
+</IfModule>
+<IfModule mod_php5.c>
+    php_value upload_max_filesize 512M
+    php_value post_max_size       512M
+    php_value memory_limit        512M
+    php_value max_execution_time  300
+    php_value max_input_time      300
+</IfModule>
