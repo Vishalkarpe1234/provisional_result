@@ -1,8 +1,18 @@
-data/*
-!data/.htaccess
-!data/sem*/
-data/sem*/*
-!data/sem*/.htaccess
+node_modules/
+.next/
+next-env.d.ts
+.vercel
+*.tsbuildinfo
+.env*.local
 
-cache/*
-!cache/.htaccess
+php-version/data/*
+!php-version/data/.htaccess
+!php-version/data/sem*/
+php-version/data/sem*/*
+!php-version/data/sem*/.htaccess
+
+php-version/cache/*
+!php-version/cache/.htaccess
+
+.vercel
+.env*
