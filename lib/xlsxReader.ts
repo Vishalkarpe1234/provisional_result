@@ -10,6 +10,14 @@ export class XlsxFormatError extends Error {}
 
 function cellText(cell: XLSX.CellObject | undefined): string {
   if (!cell) return '';
+  // Numeric cells: use the raw value, not the display text. Excel's "General"
+  // format renders a long GRN like 24004501210012 as "2.40045E+13" once a
+  // column is too narrow, and that rounded text would silently merge many
+  // different students under one truncated enrollment number. A JS number
+  // only switches to exponential notation above 1e21, far beyond any GRN or
+  // mark, so String(cell.v) is always the plain decimal digits here - this
+  // matches the PHP reader, which read the raw <v> XML value directly.
+  if (cell.t === 'n' && typeof cell.v === 'number') return String(cell.v);
   if (cell.w !== undefined) return String(cell.w);
   if (cell.v === undefined || cell.v === null) return '';
   return String(cell.v);
