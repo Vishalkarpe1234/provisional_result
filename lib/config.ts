@@ -109,8 +109,6 @@ export const config = {
     marks: { type: 'marks', style: 'official', title: 'Statement of Marks', label: 'Marks sheet' },
   } as Record<string, DocumentDef>,
 
-  letterhead_space: '38mm',
-
   letterhead: {
     logo: 'assets/logo.png',
     university: 'Lok Jagruti Kendra University',

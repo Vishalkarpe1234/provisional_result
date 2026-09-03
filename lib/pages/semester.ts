@@ -196,16 +196,11 @@ function documentsSection(input: SemesterPageInput): string {
       const isLetterhead = (doc.style ?? 'official') === 'letterhead';
       const isMarks = (doc.type ?? 'grades') === 'marks';
 
-      // The university heading/logo block is never printed - only the
-      // dedicated "letterhead" style still reserves blank space for it, for
-      // paper that already has the college header pre-printed. Every other
-      // document starts straight at the title; the address footer below is
-      // unaffected and still follows the style as before.
-      const headerHtml = isLetterhead
-        ? `<div class="letterspace" style="height: ${e(config.letterhead_space)}">
-                        <span class="letterspace-note no-print">Blank space for the pre-printed college letterhead</span>
-                    </div>`
-        : '';
+      // No document prints the plain-text university heading; the dedicated
+      // "letterhead" style instead gets the real letterhead artwork as a
+      // background on the article itself (see .doc-letterhead in app.css),
+      // so no header markup is needed here for either style.
+      const headerHtml = '';
 
       let tableHtml: string;
       if (!isMarks) {
@@ -316,7 +311,7 @@ function documentsSection(input: SemesterPageInput): string {
                     </footer>`
           : '';
 
-      return `<article class="sheet doc doc-${e(key)}" id="doc-${e(key)}">
+      return `<article class="sheet doc doc-${e(key)}${isLetterhead ? ' doc-letterhead' : ''}" id="doc-${e(key)}">
                 ${headerHtml}
                 <h2 class="doc-title">${e(doc.title ?? '')}</h2>
                 <table class="facts-table"><tbody>${factsRows}</tbody></table>

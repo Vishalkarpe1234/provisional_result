@@ -599,6 +599,40 @@ fieldset.field { border: 0; padding: 0; min-width: 0; }
     .sheet-foot { page-break-inside: avoid; }
 }
 
+/*
+ * The real college letterhead artwork, split into a top and bottom crop so
+ * each anchors to its own edge of the page instead of one image stretching
+ * (and distorting) across the whole sheet. Padding is set as a percentage
+ * of width - not a fixed length - so it always matches the height the
+ * images actually render at (background-size: 100% auto keeps their own
+ * aspect ratio), on screen and at print size alike. Placed after the print
+ * rules above so it wins over .sheet's padding reset when printing.
+ */
+.doc-letterhead {
+    background-image: url('/letterhead-top.png'), url('/letterhead-bottom.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position: top center, bottom center;
+    background-size: 100% auto, 100% auto;
+    padding-top: 21% !important;
+    padding-bottom: 13.5% !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+/* The artwork itself already claims real page space, so this variant prints
+   noticeably more tightly than the plain official style to still fit one
+   A4 page for a typical subject count. */
+@media print {
+    .doc-letterhead .doc-title { margin-top: 6px; }
+    .doc-letterhead .facts-table { margin-top: 6px; }
+    .doc-letterhead .facts-table th, .doc-letterhead .facts-table td { padding: 3px 8px; }
+    .doc-letterhead .grades { margin-top: 6px; }
+    .doc-letterhead .grades th, .doc-letterhead .grades td { padding: 3px 8px; }
+    .doc-letterhead .notes { margin-top: 12px; }
+    .doc-letterhead .signatures { margin-top: 16px; }
+    .doc-letterhead .sig-rule { height: 16px; }
+}
+
 /* ------------------------------------------------------- sheet inspector */
 
 .inspect {
@@ -1223,21 +1257,6 @@ fieldset.field { border: 0; padding: 0; min-width: 0; }
     color: #1B3A8C;
 }
 
-/* Blank area for paper that already carries the college header. */
-.letterspace {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px dashed var(--rule);
-    border-radius: 4px;
-}
-
-.letterspace-note {
-    font-size: 11.5px;
-    letter-spacing: .04em;
-    color: #A9A395;
-}
-
 .doc-title {
     margin: 26px 0 0;
     font-size: 17px;
@@ -1332,8 +1351,6 @@ fieldset.field { border: 0; padding: 0; min-width: 0; }
     .oh-tagline    { font-size: 10pt; }
     .oh-established { font-size: 7pt; }
     .oh-logo { width: 46px; }
-
-    .letterspace { border: 0; }
 
     .doc-title { margin-top: 16px; font-size: 12.5pt; }
     .facts-table { margin-top: 12px; }
