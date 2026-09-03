@@ -922,6 +922,16 @@ fieldset.field { border: 0; padding: 0; min-width: 0; }
     color: var(--ink-soft);
 }
 
+/* Reserves the width a value like "10.00" would take, so a blank SPI (a
+   fail) still shows a full-size box instead of collapsing to just the
+   label - the box should look deliberately blank, not broken. */
+.spi-value .mono {
+    display: inline-block;
+    min-width: 5ch;
+    text-align: right;
+    font-family: var(--mono);
+}
+
 .spi-class { margin: 8px 0 0; font-family: var(--serif); font-size: 14px; font-weight: 600; }
 
 .pending {
