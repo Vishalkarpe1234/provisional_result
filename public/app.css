@@ -602,35 +602,30 @@ fieldset.field { border: 0; padding: 0; min-width: 0; }
 /*
  * The real college letterhead artwork, split into a top and bottom crop so
  * each anchors to its own edge of the page instead of one image stretching
- * (and distorting) across the whole sheet. Padding is set as a percentage
- * of width - not a fixed length - so it always matches the height the
- * images actually render at (background-size: 100% auto keeps their own
- * aspect ratio), on screen and at print size alike. Placed after the print
- * rules above so it wins over .sheet's padding reset when printing.
+ * (and distorting) across the whole sheet. Scaled to half the artwork's
+ * natural width so it reads as a compact letterhead strip, not a full-bleed
+ * banner - at 100% width the two crops together claimed over a third of the
+ * page and pushed longer results onto a second page. Padding is set as a
+ * percentage of width - not a fixed length - so it always matches the
+ * height the images actually render at, on screen and at print size alike.
+ * Placed after the print rules above so it wins over .sheet's padding
+ * reset when printing.
  */
 .doc-letterhead {
     background-image: url('/letterhead-top.png'), url('/letterhead-bottom.png');
     background-repeat: no-repeat, no-repeat;
     background-position: top center, bottom center;
-    background-size: 100% auto, 100% auto;
-    padding-top: 21% !important;
-    padding-bottom: 13.5% !important;
+    background-size: 52% auto, 52% auto;
+    padding-top: 12% !important;
+    padding-bottom: 7.5% !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
 }
 
-/* The artwork itself already claims real page space, so this variant prints
-   noticeably more tightly than the plain official style to still fit one
-   A4 page for a typical subject count. */
 @media print {
-    .doc-letterhead .doc-title { margin-top: 6px; }
-    .doc-letterhead .facts-table { margin-top: 6px; }
-    .doc-letterhead .facts-table th, .doc-letterhead .facts-table td { padding: 3px 8px; }
-    .doc-letterhead .grades { margin-top: 6px; }
-    .doc-letterhead .grades th, .doc-letterhead .grades td { padding: 3px 8px; }
-    .doc-letterhead .notes { margin-top: 12px; }
-    .doc-letterhead .signatures { margin-top: 16px; }
-    .doc-letterhead .sig-rule { height: 16px; }
+    .doc-letterhead .doc-title { margin-top: 10px; }
+    .doc-letterhead .facts-table { margin-top: 10px; }
+    .doc-letterhead .grades { margin-top: 10px; }
 }
 
 /* ------------------------------------------------------- sheet inspector */
