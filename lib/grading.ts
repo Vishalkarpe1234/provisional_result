@@ -235,7 +235,9 @@ export function buildSheet(student: Student, store: StoreState, subjects: Resolv
     });
   }
 
-  const spi = creditSum > 0 ? Math.round((pointSum / creditSum) * 100) / 100 : null;
+  // A student with any F is a fail outright - no SPI is computed for a
+  // failing result, only for a student who has cleared every component.
+  const spi = failed === 0 && creditSum > 0 ? Math.round((pointSum / creditSum) * 100) / 100 : null;
 
   return {
     rows,

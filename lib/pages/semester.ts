@@ -193,14 +193,16 @@ function documentsSection(input: SemesterPageInput): string {
 
   const docsHtml = Object.entries(config.documents)
     .map(([key, doc]) => {
-      const isLetterhead = (doc.style ?? 'official') === 'letterhead';
       const isMarks = (doc.type ?? 'grades') === 'marks';
 
-      // No document prints the plain-text university heading; the dedicated
-      // "letterhead" style instead gets the real letterhead artwork as a
-      // background on the article itself (see .doc-letterhead in app.css),
-      // so no header markup is needed here for either style.
-      const headerHtml = '';
+      const headerHtml = `<header class="official-head">
+                        <div class="oh-text">
+                            <p class="oh-university">${e(head.university)}</p>
+                            ${head.tagline ? `<p class="oh-tagline">${e(head.tagline)}</p>` : ''}
+                            ${head.established ? `<p class="oh-established">${e(head.established)}</p>` : ''}
+                            ${head.school ? `<p class="oh-school">${e(head.school)}</p>` : ''}
+                        </div>
+                    </header>`;
 
       let tableHtml: string;
       if (!isMarks) {
@@ -299,9 +301,8 @@ function documentsSection(input: SemesterPageInput): string {
               .join('')}</div>`
           : '';
 
-      const footerHtml =
-        !isLetterhead && head.address
-          ? `<footer class="official-foot">
+      const footerHtml = head.address
+        ? `<footer class="official-foot">
                         <span>${e(head.address)}</span>
                         <span class="oh-contact">
                             ${head.email ? e(head.email) : ''}
@@ -309,9 +310,9 @@ function documentsSection(input: SemesterPageInput): string {
                             ${head.website ? ` &nbsp;&middot;&nbsp; ${e(head.website)}` : ''}
                         </span>
                     </footer>`
-          : '';
+        : '';
 
-      return `<article class="sheet doc doc-${e(key)}${isLetterhead ? ' doc-letterhead' : ''}" id="doc-${e(key)}">
+      return `<article class="sheet doc doc-${e(key)}" id="doc-${e(key)}">
                 ${headerHtml}
                 <h2 class="doc-title">${e(doc.title ?? '')}</h2>
                 <table class="facts-table"><tbody>${factsRows}</tbody></table>

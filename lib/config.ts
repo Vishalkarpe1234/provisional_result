@@ -17,7 +17,6 @@ export interface SlotDef {
 
 export interface DocumentDef {
   type: 'grades' | 'marks';
-  style: 'official' | 'letterhead';
   title: string;
   label: string;
   spi?: boolean;
@@ -104,9 +103,8 @@ export const config = {
   institute: 'L J Institute of Computer Applications',
 
   documents: {
-    grades: { type: 'grades', style: 'official', title: 'Provisional Result', label: 'Official grade sheet', spi: true },
-    grades_letterhead: { type: 'grades', style: 'letterhead', title: 'Provisional Result', label: 'Grade sheet for letterhead', spi: true },
-    marks: { type: 'marks', style: 'official', title: 'Statement of Marks', label: 'Marks sheet' },
+    grades: { type: 'grades', title: 'Provisional Result', label: 'Official grade sheet', spi: true },
+    marks: { type: 'marks', title: 'Statement of Marks', label: 'Marks sheet' },
   } as Record<string, DocumentDef>,
 
   letterhead: {
