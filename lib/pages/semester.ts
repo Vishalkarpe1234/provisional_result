@@ -223,15 +223,18 @@ function documentsSection(input: SemesterPageInput): string {
           })
           .join('');
 
+        // The SPI box always prints - a fail still needs to state "no SPI"
+        // rather than disappear - but the value itself is left blank rather
+        // than showing a computed figure for a result that includes an F.
         const spiBlock =
-          (doc.spi ?? true) && sheet.spi !== null
+          doc.spi ?? true
             ? `<div class="spi">
                             <p class="spi-value">
                                 <span class="spi-label">SPI</span>
-                                <span class="mono">${sheet.spi.toFixed(2)}</span>
+                                <span class="mono">${sheet.spi !== null ? sheet.spi.toFixed(2) : ''}</span>
                             </p>
                             ${
-                              config.show_class
+                              config.show_class && sheet.spi !== null
                                 ? `<p class="spi-class">${e(sheet.class)} &middot; equivalent ${(sheet.equivalent as number).toFixed(2)}%</p>`
                                 : ''
                             }
