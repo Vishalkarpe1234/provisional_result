@@ -852,7 +852,7 @@ fieldset.field { border: 0; padding: 0; min-width: 0; }
 
 .grades th {
     padding: 7px 10px;
-    border: 1px solid var(--rule);
+    border: 1px solid var(--ink-soft);
     background: #F6F5F1;
     font-size: 11px;
     font-weight: 600;
@@ -866,7 +866,7 @@ fieldset.field { border: 0; padding: 0; min-width: 0; }
 
 .grades td {
     padding: 7px 10px;
-    border: 1px solid var(--rule-soft);
+    border: 1px solid var(--ink-soft);
     vertical-align: middle;
 }
 
